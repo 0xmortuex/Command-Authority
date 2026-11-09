@@ -41,11 +41,11 @@ const LINES = [
     s('E-3', 'Private First Class', 'Rifleman'),
     s('E-4', 'Corporal', 'Rifleman'),
     s('E-5', 'Sergeant', 'Rifleman / Automatic Rifleman'),
-    s('E-7', 'Sergeant First Class', 'Platoon Sergeant', [...nums('ARROW', 4, 5), ...nums('BAYONET', 4, 5)], true),
-    s('O-2', '1st Lieutenant', 'Platoon Leader', [...nums('ARROW', 2, 3), ...nums('BAYONET', 2, 3)]),
-    s('O-3', 'Captain', 'Company Commander', ['ARROW-6', 'BAYONET-6']),
-    s('O-5', 'Lieutenant Colonel', 'Battalion Commander', ['CHIEF-6', 'COMBAT-6']),
-    s('O-6', 'Colonel', 'Brigade Commander', ['DAGGER-6'])
+    s('E-7', 'Sergeant First Class', 'Platoon Sergeant', [...nums('ARROW', 4, 5), ...nums('BAYONET', 4, 5), 'ATTACK 1-7'], true),
+    s('O-2', '1st Lieutenant', 'Platoon Leader', [...nums('ARROW', 2, 3), ...nums('BAYONET', 2, 3), 'ATTACK 1-6']),
+    s('O-3', 'Captain', 'Company / Troop Commander', ['ARROW-6', 'BAYONET-6', 'ATTACK 6', 'BATTLE 6']),
+    s('O-5', 'Lieutenant Colonel', 'Battalion Commander', ['CHIEF-6', 'COMBAT-6', 'SHERPA 6']),
+    s('O-6', 'Colonel', 'Brigade / Division Commander', ['DAGGER-6', 'WARRIOR 6'])
   ] },
   { id: 'marines', name: 'Marines', color: '#4f86c6', feeder: 'land', bridge: [GEN], steps: [
     s('E-1', 'Private', 'Recruit (no branch)'),
@@ -250,6 +250,8 @@ document.querySelectorAll('.ucard').forEach(card => {
       callsign: text, keys, unit, unitDetail, branch, color,
       job: jobCell.textContent, rank: rankCell.textContent,
       onWiki: csCell.classList.contains('w'),
+      seen: csCell.classList.contains('seen'),
+      confirmed: csCell.classList.contains('confirmed'),
       leaderKey
     };
     DIRECTORY.push(entry);
@@ -258,7 +260,7 @@ document.querySelectorAll('.ucard').forEach(card => {
 });
 
 // Units whose non-leader rows report to the first row of their card.
-const ROLLUP = new Set(['ARROW', 'BAYONET', 'APACHE', 'BLACKFOOT', 'MARSHAL', 'TOMBSTONE', 'TITAN', 'TRIBUNE', 'TACTICS / ANGEL', 'EXPLOSIVE', 'JOLLY', 'TALON']);
+const ROLLUP = new Set(['ARROW', 'BAYONET', 'ATTACK', 'APACHE', 'BLACKFOOT', 'MARSHAL', 'TOMBSTONE', 'TITAN', 'TRIBUNE', 'TACTICS / ANGEL', 'EXPLOSIVE', 'JOLLY', 'TALON']);
 const REPORTS = {
   OBELISK1: 'OBELISK6', OBELISK12: 'OBELISK1', OBELISK16: 'OBELISK1', OBELISK18: 'OBELISK1', DEUS: 'OBELISK6',
   ORION6: 'OBELISK6', OVERWATCH6: 'OBELISK6', OCEAN6: 'OBELISK6', OUTRIDER6: 'OBELISK6',
@@ -440,6 +442,7 @@ $('standings').innerHTML = '<tr><th>Seat</th><th>Rank</th><th>Reading A</th><th>
 const LOWER = {
   land: [
     { label: 'DAGGER-6', job: 'Army Brigade Commander (O-6)' },
+    { label: 'WARRIOR 6', job: 'Division Commander (O-6)' },
     { label: 'Marine Regiment Commander', job: 'O-6' },
     { label: 'Base Commander', job: 'O-6' }
   ],
@@ -509,6 +512,8 @@ const csIn = $('cs-q'), csOut = $('cs-out');
 const CS_LIMIT = 12;
 
 function statusOf(e) {
+  if (e.confirmed) return 'Callsign, job and rank confirmed in game';
+  if (e.seen) return 'Callsign seen on the in-game radio. Job and rank are inferred';
   if (e.onWiki) return 'Written on the wiki';
   if (/-6$/.test(e.callsign)) return 'Commander: number 6 set by the site owner, not on the wiki';
   return /\d/.test(e.callsign) ? 'Number is a guess, assigned by seniority' : 'Name from the wiki rank tables';
@@ -544,7 +549,7 @@ const TRANSLATE = [
   ['O-9', 'Lieutenant General', 'Vice Admiral', '—', 'SOC Component Commander'],
   ['O-8', 'Major General', 'Rear Admiral (Upper)', 'Major General', 'Component Commanders · Chief of Staff'],
   ['O-7', 'Brigadier General', 'Rear Admiral (Lower)', '—', 'Senior staff'],
-  ['O-6', 'Colonel', 'Captain', '—', 'Brigade · Regiment · Base · Task Force Commander'],
+  ['O-6', 'Colonel', 'Captain', '—', 'Division · Brigade · Regiment · Base · Task Force Commander'],
   ['O-5', 'Lieutenant Colonel', 'Commander', 'Lt Commander*', 'Battalion · Squadron Commander'],
   ['O-4', 'Major', 'Lt Commander', '—', 'Provost Marshal · Clinical Director'],
   ['O-3', 'Captain', 'Lieutenant', 'Captain', 'Company Commander · ODA · Flight Commander'],
