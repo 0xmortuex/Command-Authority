@@ -79,7 +79,7 @@ const LINES = [
     s('E-4', 'Senior Airman', 'Pararescue Operator', ['ANGEL-4']),
     s('E-5', 'Operator 2nd Class / SSgt', 'Pararescue Operator · EOD', ['ANGEL-3', 'EXPLOSIVE-4']),
     s('E-6', 'Operator 1st Class / TSgt', 'Operator · EOD', ['EXPLOSIVE-3']),
-    s('E-8', 'Senior Chief / Master Sgt', 'Platoon Chief · First Sergeant · EOD', ['TRIDENT-3', 'TRIDENT-4', 'ANGEL-2', 'EXPLOSIVE-2']),
+    s('E-8', 'Senior Chief / Master Sgt', 'Platoon Chief · First Sergeant · EOD', ['TRIDENT-3', 'TRIDENT 2-7', 'ANGEL-2', 'EXPLOSIVE-2']),
     s('O-3', 'Lieutenant / Captain', 'SEAL / SBT Platoon Cdr · Pararescue and Engineer Flight Cdr', ['TRIDENT 1', 'TRIDENT 2', 'ANGEL-6', 'EXPLOSIVE-6']),
     s('O-5', 'Commander / Lt Cdr', 'NSWU-8 Commanding Officer · 26th STS Squadron Commander', ['TACTICS-6'])
   ] },
@@ -268,7 +268,7 @@ const REPORTS = {
   DAGGER6: 'ORION6', CHIEF6: 'DAGGER6', COMBAT6: 'DAGGER6',
   ARROW6: 'COMBAT6', BAYONET6: 'COMBAT6', APACHE6: 'ORION6', BLACKFOOT6: 'ORION6', MARSHAL6: 'ORION6',
   TANGO6: 'OUTRIDER6', TOMBSTONE6: 'TANGO6', TITAN6: 'TANGO6', TRIBUNE6: 'TANGO6',
-  TRIDENT1: 'OUTRIDER6', TRIDENT2: 'OUTRIDER6', TRIDENT3: 'TRIDENT1', TRIDENT4: 'TRIDENT2',
+  TRIDENT1: 'OUTRIDER6', TRIDENT2: 'OUTRIDER6', TRIDENT3: 'TRIDENT1', TRIDENT27: 'TRIDENT2',
   TACTICS6: 'OUTRIDER6', ANGEL6: 'TACTICS6', EXPLOSIVE6: 'TACTICS6',
   TALON6: 'OVERWATCH6', JOLLY6: 'OVERWATCH6'
 };
